@@ -1,0 +1,27 @@
+from pathlib import Path
+
+SECONDS_IN_A_DAY = 86400
+SECONDS_IN_A_WEEK = SECONDS_IN_A_DAY * 7
+SECONDS_IN_A_MONTH = SECONDS_IN_A_DAY * 365 / 12
+SECONDS_IN_A_YEAR = SECONDS_IN_A_DAY * 365
+
+HOURS_IN_A_YEAR = 24 * 365
+
+SOLAR_TO_PAR = 2.1  # Multiply solar W/m² by this to get PAR light [mmol/m²/s]
+LAMPS_TO_PAR = 4.6  # Multiply lamp intensity W/m² to get PAR light [mmol/m²/s]
+
+JOULES_PER_KWH = 3_600_000
+
+DENSITY_CO2 = 1.98
+DENSITY_AIR = 1.204
+
+WATER_VAPOR_SPECIFIC_GAS_CONSTANT = 461.5
+
+REFERENCE_GROWER = 0.64  # 475,500 / 12 / 62_000
+RULE_BASED_BASE = 0.62
+RULE_BASED_OPTIMIZED = 0.7597
+
+REFERENCE_UPPER_BOUND = 4.21
+
+
+RAY_RESULTS_FOLDER = Path("~/ray_results").expanduser()

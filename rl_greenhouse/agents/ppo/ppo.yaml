@@ -1,0 +1,31 @@
+num_workers: 15
+num_envs_per_worker: 1
+num_gpus: 0
+batch_mode: complete_episodes
+framework: tf2
+
+# To evaluate properly with the benchmark method we need to lock num evaluation_num_workers to 1, set num_episodes to 10
+# Also, num_envs_per_worker should be 1 and evaluation_parallel_to_training should be True.
+evaluation_num_workers: 1
+evaluation_interval: 1
+evaluation_num_episodes: 10
+evaluation_parallel_to_training: True
+
+# Env Settings
+env_config:
+  wrappers: [ GreenhouseNumpy, FeatureEngineeringWrapper ]
+
+# Algorithm Settings
+use_critic: true
+use_gae: true
+model:
+  fcnet_activation: tanh
+  fcnet_hiddens: [ 128, 128, 128 ]
+  vf_share_layers: false
+
+lr: 0.0001
+sgd_minibatch_size: 16384
+lambda: 1.0
+gamma: 0.99
+entropy_coeff: 0.001
+train_batch_size: 131072

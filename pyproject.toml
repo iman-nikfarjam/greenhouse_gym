@@ -1,0 +1,35 @@
+[tool.poetry]
+name = "rl-greenhouse-control"
+version = "0.1.0"
+description = ""
+authors = ["Wouter van den Bemd <wouter.vd.bemd@vbti.nl>"]
+
+[tool.poetry.dependencies]
+python = "~3.8"
+matplotlib = "*"
+ray = {extras = ["rllib"], version = "^2.0.1"}
+gym = "*"
+black = "^22.10.0"
+dm-tree = "^0.1.7"
+pandas = "^1.5.1"
+tensorflow = "^2.10.0"
+seaborn = "^0.12.1"
+
+[tool.poetry.group.dev.dependencies]
+jupyter = { version = "^1.0", source = "pypi" }
+black = "^22.10.0"
+isort = "^5.10.1"
+pylint = "^2.15.5"
+
+[build-system]
+requires = ["poetry-core>=1.2.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pylint.messages_control]
+disable = ["C0114"]
+
+[tool.pylint.format]
+max-line-length = 120
+
+[tool.black]
+line-length = 120
