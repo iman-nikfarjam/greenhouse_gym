@@ -257,34 +257,19 @@ class NotReachingGoalPenalty(RewardFunction):
 
 
 class BalanceReward(RewardFunction):
-    """
-    Credits the algorithm for profit / loss when applicable.
-
-    Ensures cumulative reward equals the final profit, even in case of an early finish.
-    """
+    """Reward based directly on changes in greenhouse balance."""
 
     def __init__(self, config: dict):
         super().__init__(config)
-        self.total_assigned_balance = 0
-        self.funcs = [
-            QualityLossReward(config),
-            GrowthReward(config),
-            CostsReward(config),
-            MissedProfitsMotivator(config),
-        ]
+        self.prev_balance = 0.0
 
     def reset(self):
-        for func in self.funcs:
-            func.reset()
+        self.prev_balance = 0.0
 
     def calculate(self, full_state: Observation, done: bool) -> float:
-        reward = sum([func.calculate(full_state, done) for func in self.funcs])
-
-        # If we are done
-        if done:
-            reward /= 0.5
-
-        self.total_assigned_balance += reward
+        current_balance = full_state.info.balance
+        reward = current_balance - self.prev_balance
+        self.prev_balance = current_balance
         return reward
 
 

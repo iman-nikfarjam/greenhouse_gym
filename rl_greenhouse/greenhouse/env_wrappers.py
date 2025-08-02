@@ -5,7 +5,12 @@ from typing import Union
 import gym
 import numpy as np
 from gym.spaces import Box, Dict
-from ray.rllib import MultiAgentEnv
+try:  # pragma: no cover - optional dependency
+    from ray.rllib import MultiAgentEnv  # type: ignore
+except ModuleNotFoundError:  # pragma: no cover
+    class MultiAgentEnv:  # type: ignore
+        """Fallback stub when Ray is not installed."""
+        pass
 
 from rl_greenhouse.greenhouse import env as greenhouse_gym
 from rl_greenhouse.greenhouse.types import Observation, Action, AdversarialAction

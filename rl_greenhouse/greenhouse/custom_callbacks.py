@@ -1,11 +1,30 @@
 from typing import Dict, Optional
 
 import numpy as np
-from ray.rllib.agents.callbacks import DefaultCallbacks
-from ray.rllib.env import BaseEnv
-from ray.rllib.evaluation import RolloutWorker, MultiAgentEpisode
-from ray.rllib.policy import Policy
-from ray.rllib.utils.typing import PolicyID
+try:  # pragma: no cover - optional dependency
+    from ray.rllib.agents.callbacks import DefaultCallbacks  # type: ignore
+    from ray.rllib.env import BaseEnv  # type: ignore
+    from ray.rllib.evaluation import RolloutWorker, MultiAgentEpisode  # type: ignore
+    from ray.rllib.policy import Policy  # type: ignore
+    from ray.rllib.utils.typing import PolicyID  # type: ignore
+except ModuleNotFoundError:  # pragma: no cover
+    class DefaultCallbacks:  # type: ignore
+        """Fallback stub when Ray is not installed."""
+        pass
+
+    class BaseEnv:  # type: ignore
+        pass
+
+    class RolloutWorker:  # type: ignore
+        pass
+
+    class MultiAgentEpisode:  # type: ignore
+        pass
+
+    class Policy:  # type: ignore
+        pass
+
+    PolicyID = str  # type: ignore
 
 from rl_greenhouse.greenhouse.types import Observation, Action
 

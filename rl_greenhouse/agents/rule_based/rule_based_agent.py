@@ -11,7 +11,12 @@ from dataclasses import dataclass
 from typing import Union, List
 
 import numpy as np
-from ray.rllib import MultiAgentEnv
+try:  # pragma: no cover - optional dependency
+    from ray.rllib import MultiAgentEnv  # type: ignore
+except ModuleNotFoundError:  # pragma: no cover
+    class MultiAgentEnv:  # type: ignore
+        """Fallback stub when Ray is not installed."""
+        pass
 
 from rl_greenhouse.greenhouse.types import Action, Sequence, Observation
 from rl_greenhouse.greenhouse import Greenhouse, GreenhouseNumpy, WrappedGreenhouse

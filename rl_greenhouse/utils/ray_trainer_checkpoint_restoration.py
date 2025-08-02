@@ -5,7 +5,12 @@ from typing import Type, Union
 
 import numpy as np
 from gym.spaces import Box
-from ray.rllib.agents import Trainer
+try:  # pragma: no cover - optional dependency
+    from ray.rllib.agents import Trainer  # type: ignore
+except ModuleNotFoundError:  # pragma: no cover
+    class Trainer:  # type: ignore
+        """Fallback stub when Ray is not installed."""
+        pass
 
 
 def restore_config(checkpoint_path: str) -> dict:
