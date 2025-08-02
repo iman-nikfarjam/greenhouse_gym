@@ -7,7 +7,12 @@ from typing import Dict, Tuple, List, Type, Union
 import numpy as np
 import seaborn as sns
 from matplotlib import pyplot as plt
-from ray.rllib.agents import Trainer
+try:  # pragma: no cover - optional dependency
+    from ray.rllib.agents import Trainer  # type: ignore
+except ModuleNotFoundError:  # pragma: no cover
+    class Trainer:  # type: ignore
+        """Fallback stub when Ray is not installed."""
+        pass
 
 from rl_greenhouse.greenhouse import DEFAULT_GREENHOUSE_CONFIG, GreenhouseNumpy, WrappedGreenhouse
 from rl_greenhouse.utils.evaluation import benchmark_agent_multiple_envs
